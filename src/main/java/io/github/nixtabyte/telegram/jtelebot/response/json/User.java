@@ -16,6 +16,10 @@ import org.codehaus.jackson.annotate.JsonProperty;
  *
  * @since 0.0.1
  */
+ /** This is problem. DefaultCommandWatcher : JSON parsing failed
+ * DefaultCommandWatcher : io.github.nixtabyte.telegram.jtelebot.exception.JsonParsingException: 
+ * org.codehaus.jackson.map.JsonMappingException: Unrecognized field "type" */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User extends Chat{
 
 	
