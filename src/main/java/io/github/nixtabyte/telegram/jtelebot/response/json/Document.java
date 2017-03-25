@@ -15,6 +15,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * 	This object represents a general file (as opposed to photos and audio files).
  *
  * @since 0.0.1
+ * @see <a href="https://core.telegram.org/bots/api#document">http://google.com</a>
  */
 public class Document{
 	/**
@@ -22,6 +23,11 @@ public class Document{
 	 */
 	@JsonProperty("file_id")
 	private String fileId;
+
+	/**
+	 *  Optional
+	 */
+
 	/**
 	 * Document thumbnail as defined by sender
 	 */
@@ -180,11 +186,12 @@ public class Document{
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		return "Document [fileId=" + fileId + ", thumb=" + thumb
-				+ ", fileName=" + fileName + ", mimeType=" + mimeType
-				+ ", fileSize=" + fileSize + "]";
+		return "\nDocument{" +
+				"fileId='" + fileId + '\'' +
+				", thumb=" + thumb +
+				", fileName='" + fileName + '\'' +
+				", mimeType='" + mimeType + '\'' +
+				", fileSize=" + fileSize +
+				'}';
 	}
-	
-	
-
 }

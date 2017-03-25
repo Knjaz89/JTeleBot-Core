@@ -24,6 +24,12 @@ public class GroupChat extends Chat {
 	@JsonProperty("title")
 	private String title;
 
+	@JsonProperty("type")
+	private String type;
+
+	@JsonProperty("all_members_are_administrators")
+	private String all_members_are_administrators;
+
 	/**
 	 * <p>Getter for the field <code>title</code>.</p>
 	 *
@@ -75,4 +81,19 @@ public class GroupChat extends Chat {
 	}
 
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getAll_members_are_administrators() {
+		return all_members_are_administrators;
+	}
+
+	public void setAll_members_are_administrators(String all_members_are_administrators) {
+		this.all_members_are_administrators = all_members_are_administrators;
+	}
 }

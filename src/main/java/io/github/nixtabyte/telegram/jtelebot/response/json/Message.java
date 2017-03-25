@@ -20,40 +20,54 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * This object represents a message.
  *
  * @since 0.0.1
+ * @see <a href="https://core.telegram.org/bots/api#message">http://google.com</a>
  */
 public class Message {
 	/**
 	 * Unique message identifier
 	 */
 	@JsonProperty("message_id")
-	private Long id;
-	/**
-	 * Sender
-	 */
-	@JsonProperty("from")
-	private User fromUser;
+	private Integer messageId;
 	/**
 	 * Date the message was sent in Unix time
 	 */
 	@JsonProperty("date")
-	private Long unixTimeDate;
+	private Integer date;
 	/**
-	 * Conversation the message belongs to ????????? user in case of a private message,
-	 * GroupChat in case of a group
+	 * Conversation the message belongs to
 	 */
 	@JsonProperty("chat")
 	private Chat chat;
+
+	/**
+	 * Optional
+	 */
+
+	/**
+	 * Sender, can be empty for messages sent to channels
+	 */
+	@JsonProperty("from")
+	private User from;
 	/**
 	 * Optional. For forwarded messages, sender of the original message
 	 */
 	@JsonProperty("forward_from")
-	private User forwardFromUser;
+	private User forwardFrom;
 	/**
-	 * Optional. For forwarded messages, date the original message was sent in
-	 * Unix time
+	 * Optional. For messages forwarded from a channel, information about the original channel
+	 */
+	@JsonProperty("forward_from_chat")
+	private Chat forwardFromChat;
+	/**
+	 * For forwarded channel posts, identifier of the original message in the channel
+	 */
+	@JsonProperty("forward_from_message_id")
+	private Integer forwardFromMessageId;
+	/**
+	 * For forwarded messages, date the original message was sent in Unix time
 	 */
 	@JsonProperty("forward_date")
-	private Long forwardDate;
+	private Integer forwardDate;
 	/**
 	 * Optional. For replies, the original message. Note that the Message object
 	 * in this field will not contain further reply_to_message fields even if it
@@ -62,11 +76,20 @@ public class Message {
 	@JsonProperty("reply_to_message")
 	private Message replyToMessage;
 	/**
-	 * Optional. For text messages, the actual UTF-8 text of the message
+	 * Date the message was last edited in Unix time
+	 */
+	@JsonProperty("edit_date")
+	private Integer edit_date;
+	/**
+	 * For text messages, the actual UTF-8 text of the message, 0-4096 characters.
 	 */
 	@JsonProperty("text")
 	private String text;
-
+	/**
+	 * For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text
+	 */
+	@JsonProperty("entities")
+	private MessageEntity[] entities;
 	/**
 	 * Optional. Message is an audio file, information about the file
 	 * */
@@ -79,6 +102,11 @@ public class Message {
 	@JsonProperty("document")
 	private Document document;
 
+	/**
+	 * Optional. Message is a general file, information about the file
+	 * */
+	@JsonProperty("game")
+	private Game game;
 	/**
 	 * Optional. Message is a photo, available sizes of the photo
 	 * */
@@ -96,7 +124,16 @@ public class Message {
 	 * */
 	@JsonProperty("video")
 	private Video video;
-
+	/**
+	 *  Message is a voice message, information about the file
+	 */
+	@JsonProperty("voice")
+	private Voice voice;
+	/**
+	 * Caption for the document, photo or video, 0-200 characters
+	 */
+	@JsonProperty("caption")
+	private String caption;
 	/**
 	 * Optional. Message is a shared contact, information about the contact
 	 * */
@@ -110,17 +147,21 @@ public class Message {
 	private Location location;
 
 	/**
-	 * Optional. A new member was added to the group, information about them
-	 * (this member may be bot itself)
-	 */
-	@JsonProperty("new_chat_participant")
-	private User newChatParticipantUser;
+	 * Optional. Message is a venue, information about the venue
+	 * */
+	@JsonProperty("venue")
+	private Venue venue;
+
 	/**
-	 * Optional. A member was removed from the group, information about them
-	 * (this member may be bot itself)
+	 * Optional. A new member was added to the group, information about them (this member may be the bot itself)
 	 */
-	@JsonProperty("left_chat_participant")
-	private User leftChatParticipantUser;
+	@JsonProperty("new_chat_member")
+	private User newChatMember;
+	/**
+	 * Optional. A member was removed from the group, information about them (this member may be the bot itself)
+	 */
+	@JsonProperty("left_chat_member")
+	private User leftChatMember;
 	/**
 	 * Optional. A group title was changed to this value
 	 */
@@ -145,207 +186,61 @@ public class Message {
 	@JsonProperty("group_chat_created")
 	private Boolean groupChatCreated;
 
-	public Long getId() {
-		return id;
+	@JsonProperty("supergroup_chat_created")
+	private Boolean supergroupChatCreated;
+
+	@JsonProperty("channel_chat_created")
+	private Boolean channelChatCreated;
+
+
+	@JsonProperty("migrate_to_chat_id")
+	private String migrate_to_chat_id;
+
+	@JsonProperty("migrate_from_chat_id")
+	private String migrate_from_chat_id;
+
+	@JsonProperty("pinned_message")
+	private Message pinnedMessage;
+
+	@Override
+	public String toString() {
+		return "\nMessage{" +
+				"messageId=" + messageId +
+				", date=" + date +
+				", chat=" + chat +
+				", from=" + from +
+				", forwardFrom=" + forwardFrom +
+				", forwardFromChat=" + forwardFromChat +
+				", forwardFromMessageId=" + forwardFromMessageId +
+				", forwardDate=" + forwardDate +
+				", replyToMessage=" + replyToMessage +
+				", edit_date=" + edit_date +
+				", text='" + text + '\'' +
+				", entities=" + Arrays.toString(entities) +
+				", audio=" + audio +
+				", document=" + document +
+				", game=" + game +
+				", photo=" + Arrays.toString(photo) +
+				", sticker=" + sticker +
+				", video=" + video +
+				", voice=" + voice +
+				", caption='" + caption + '\'' +
+				", contact=" + contact +
+				", location=" + location +
+				", venue=" + venue +
+				", newChatMember=" + newChatMember +
+				", leftChatMember=" + leftChatMember +
+				", newChatTitle='" + newChatTitle + '\'' +
+				", newChatPhoto=" + Arrays.toString(newChatPhoto) +
+				", deleteChatPhoto=" + deleteChatPhoto +
+				", groupChatCreated=" + groupChatCreated +
+				", supergroupChatCreated=" + supergroupChatCreated +
+				", channelChatCreated=" + channelChatCreated +
+				", migrate_to_chat_id='" + migrate_to_chat_id + '\'' +
+				", migrate_from_chat_id='" + migrate_from_chat_id + '\'' +
+				", pinnedMessage=" + pinnedMessage +
+				'}';
 	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
-	public User getFromUser() {
-		return fromUser;
-	}
-
-
-	public void setFromUser(final User fromUser) {
-		this.fromUser = fromUser;
-	}
-
-
-	public Long getUnixTimeDate() {
-		return unixTimeDate;
-	}
-
-
-	public void setUnixTimeDate(final Long unixTimeDate) {
-		this.unixTimeDate = unixTimeDate;
-	}
-
-
-	public Chat getChat() {
-		return chat;
-	}
-
-	@JsonProperty
-	public void setChat(final JsonNode chat) {
-		if (chat != null
-				&& (chat.toString() != null && chat.toString().length() != 0)) {
-			if (chat.toString().contains("title")) {// must be groupchat
-				this.chat = MapperHandler.INSTANCE.getObjectMapper()
-						.convertValue(chat, GroupChat.class);
-			
-			} else if (chat.toString().contains("first_name")) {// must be user
-				this.chat = MapperHandler.INSTANCE.getObjectMapper()
-						.convertValue(chat, User.class);
-			}
-		}
-	}
-
-	public void setChat(final Chat chat) {
-		this.chat = chat;
-	}
-
-	public User getForwardFromUser() {
-		return forwardFromUser;
-	}
-
-	public void setForwardFromUser(final User forwardFromUser) {
-		this.forwardFromUser = forwardFromUser;
-	}
-
-	public Long getForwardDate() {
-		return forwardDate;
-	}
-
-	public void setForwardDate(final Long forwardDate) {
-		this.forwardDate = forwardDate;
-	}
-
-	public Message getReplyToMessage() {
-		return replyToMessage;
-	}
-
-	public void setReplyToMessage(final Message replyToMessage) {
-		this.replyToMessage = replyToMessage;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(final String text) {
-		this.text = text;
-	}
-
-	public Audio getAudio() {
-		return audio;
-	}
-
-	public void setAudio(final Audio audio) {
-		this.audio = audio;
-	}
-
-	public Document getDocument() {
-		return document;
-	}
-
-	public void setDocument(final Document document) {
-		this.document = document;
-	}
-	
-	public PhotoSize[] getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(final PhotoSize[] photo) {
-		this.photo = photo;
-	}
-
-
-	public Sticker getSticker() {
-		return sticker;
-	}
-
-
-	public void setSticker(final Sticker sticker) {
-		this.sticker = sticker;
-	}
-
-	public Video getVideo() {
-		return video;
-	}
-
-	public void setVideo(final Video video) {
-		this.video = video;
-	}
-
-
-	public Contact getContact() {
-		return contact;
-	}
-
-
-	public void setContact(final Contact contact) {
-		this.contact = contact;
-	}
-
-
-	public Location getLocation() {
-		return location;
-	}
-
-
-	public void setLocation(final Location location) {
-		this.location = location;
-	}
-
-	public User getNewChatParticipantUser() {
-		return newChatParticipantUser;
-	}
-
-
-	public void setNewChatParticipantUser(final User newChatParticipantUser) {
-		this.newChatParticipantUser = newChatParticipantUser;
-	}
-
-
-	public User getLeftChatParticipantUser() {
-		return leftChatParticipantUser;
-	}
-
-
-	public void setLeftChatParticipantUser(final User leftChatParticipantUser) {
-		this.leftChatParticipantUser = leftChatParticipantUser;
-	}
-
-
-	public String getNewChatTitle() {
-		return newChatTitle;
-	}
-
-
-	public void setNewChatTitle(final String newChatTitle) {
-		this.newChatTitle = newChatTitle;
-	}
-
-
-	public PhotoSize[] getNewChatPhoto() {
-		return newChatPhoto;
-	}
-
-	public void setNewChatPhoto(final PhotoSize[] newChatPhoto) {
-		this.newChatPhoto = newChatPhoto;
-	}
-
-	public Boolean getDeleteChatPhoto() {
-		return deleteChatPhoto;
-	}
-
-	public void setDeleteChatPhoto(final Boolean deleteChatPhoto) {
-		this.deleteChatPhoto = deleteChatPhoto;
-	}
-
-
-	public Boolean getGroupChatCreated() {
-		return groupChatCreated;
-	}
-
-	public void setGroupChatCreated(final Boolean groupChatCreated) {
-		this.groupChatCreated = groupChatCreated;
-	}
-
 
 	@Override
 	public int hashCode() {
@@ -363,23 +258,23 @@ public class Message {
 		result = prime * result
 				+ ((forwardDate == null) ? 0 : forwardDate.hashCode());
 		result = prime * result
-				+ ((forwardFromUser == null) ? 0 : forwardFromUser.hashCode());
+				+ ((forwardFrom == null) ? 0 : forwardFrom.hashCode());
 		result = prime * result
-				+ ((fromUser == null) ? 0 : fromUser.hashCode());
+				+ ((from == null) ? 0 : from.hashCode());
 		result = prime
 				* result
 				+ ((groupChatCreated == null) ? 0 : groupChatCreated.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((messageId == null) ? 0 : messageId.hashCode());
 		result = prime
 				* result
-				+ ((leftChatParticipantUser == null) ? 0
-						: leftChatParticipantUser.hashCode());
+				+ ((leftChatMember == null) ? 0
+						: leftChatMember.hashCode());
 		result = prime * result
 				+ ((location == null) ? 0 : location.hashCode());
 		result = prime
 				* result
-				+ ((newChatParticipantUser == null) ? 0
-						: newChatParticipantUser.hashCode());
+				+ ((newChatMember == null) ? 0
+						: newChatMember.hashCode());
 		result = prime * result + Arrays.hashCode(newChatPhoto);
 		result = prime * result
 				+ ((newChatTitle == null) ? 0 : newChatTitle.hashCode());
@@ -389,7 +284,7 @@ public class Message {
 		result = prime * result + ((sticker == null) ? 0 : sticker.hashCode());
 		result = prime * result + ((text == null) ? 0 : text.hashCode());
 		result = prime * result
-				+ ((unixTimeDate == null) ? 0 : unixTimeDate.hashCode());
+				+ ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((video == null) ? 0 : video.hashCode());
 		return result;
 	}
@@ -434,41 +329,41 @@ public class Message {
 				return false;
 		} else if (!forwardDate.equals(other.forwardDate))
 			return false;
-		if (forwardFromUser == null) {
-			if (other.forwardFromUser != null)
+		if (forwardFrom == null) {
+			if (other.forwardFrom != null)
 				return false;
-		} else if (!forwardFromUser.equals(other.forwardFromUser))
+		} else if (!forwardFrom.equals(other.forwardFrom))
 			return false;
-		if (fromUser == null) {
-			if (other.fromUser != null)
+		if (from == null) {
+			if (other.from != null)
 				return false;
-		} else if (!fromUser.equals(other.fromUser))
+		} else if (!from.equals(other.from))
 			return false;
 		if (groupChatCreated == null) {
 			if (other.groupChatCreated != null)
 				return false;
 		} else if (!groupChatCreated.equals(other.groupChatCreated))
 			return false;
-		if (id == null) {
-			if (other.id != null)
+		if (messageId == null) {
+			if (other.messageId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!messageId.equals(other.messageId))
 			return false;
-		if (leftChatParticipantUser == null) {
-			if (other.leftChatParticipantUser != null)
+		if (leftChatMember == null) {
+			if (other.leftChatMember != null)
 				return false;
-		} else if (!leftChatParticipantUser
-				.equals(other.leftChatParticipantUser))
+		} else if (!leftChatMember
+				.equals(other.leftChatMember))
 			return false;
 		if (location == null) {
 			if (other.location != null)
 				return false;
 		} else if (!location.equals(other.location))
 			return false;
-		if (newChatParticipantUser == null) {
-			if (other.newChatParticipantUser != null)
+		if (newChatMember == null) {
+			if (other.newChatMember != null)
 				return false;
-		} else if (!newChatParticipantUser.equals(other.newChatParticipantUser))
+		} else if (!newChatMember.equals(other.newChatMember))
 			return false;
 		if (!Arrays.equals(newChatPhoto, other.newChatPhoto))
 			return false;
@@ -494,10 +389,10 @@ public class Message {
 				return false;
 		} else if (!text.equals(other.text))
 			return false;
-		if (unixTimeDate == null) {
-			if (other.unixTimeDate != null)
+		if (date == null) {
+			if (other.date != null)
 				return false;
-		} else if (!unixTimeDate.equals(other.unixTimeDate))
+		} else if (!date.equals(other.date))
 			return false;
 		if (video == null) {
 			if (other.video != null)
@@ -507,23 +402,275 @@ public class Message {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Message [id=" + id + ", fromUser=" + fromUser
-				+ ", unixTimeDate=" + unixTimeDate + ", chat=" + chat
-				+ ", forwardFromUser=" + forwardFromUser + ", forwardDate="
-				+ forwardDate + ", replyToMessage=" + replyToMessage
-				+ ", text=" + text + ", audio=" + audio + ", document="
-				/** {@inheritDoc} */
-				+ document + ", photo=" + Arrays.toString(photo) + ", sticker="
-				+ sticker + ", video=" + video + ", contact=" + contact
-				+ ", location=" + location + ", newChatParticipantUser="
-				+ newChatParticipantUser + ", leftChatParticipantUser="
-				+ leftChatParticipantUser + ", newChatTitle=" + newChatTitle
-				+ ", newChatPhoto=" + Arrays.toString(newChatPhoto)
-				+ ", deleteChatPhoto=" + deleteChatPhoto
-				+ ", groupChatCreated=" + groupChatCreated + "]";
+	public Integer getMessageId() {
+		return messageId;
 	}
 
-	
+	public void setMessageId(Integer messageId) {
+		this.messageId = messageId;
+	}
+
+	public Integer getDate() {
+		return date;
+	}
+
+	public void setDate(Integer date) {
+		this.date = date;
+	}
+
+	public Chat getChat() {
+		return chat;
+	}
+
+	public void setChat(Chat chat) {
+		this.chat = chat;
+	}
+
+	public User getFrom() {
+		return from;
+	}
+
+	public void setFrom(User from) {
+		this.from = from;
+	}
+
+	public User getForwardFrom() {
+		return forwardFrom;
+	}
+
+	public void setForwardFrom(User forwardFrom) {
+		this.forwardFrom = forwardFrom;
+	}
+
+	public Chat getForwardFromChat() {
+		return forwardFromChat;
+	}
+
+	public void setForwardFromChat(Chat forwardFromChat) {
+		this.forwardFromChat = forwardFromChat;
+	}
+
+	public Integer getForwardFromMessageId() {
+		return forwardFromMessageId;
+	}
+
+	public void setForwardFromMessageId(Integer forwardFromMessageId) {
+		this.forwardFromMessageId = forwardFromMessageId;
+	}
+
+	public Integer getForwardDate() {
+		return forwardDate;
+	}
+
+	public void setForwardDate(Integer forwardDate) {
+		this.forwardDate = forwardDate;
+	}
+
+	public Message getReplyToMessage() {
+		return replyToMessage;
+	}
+
+	public void setReplyToMessage(Message replyToMessage) {
+		this.replyToMessage = replyToMessage;
+	}
+
+	public Integer getEdit_date() {
+		return edit_date;
+	}
+
+	public void setEdit_date(Integer edit_date) {
+		this.edit_date = edit_date;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public MessageEntity[] getEntities() {
+		return entities;
+	}
+
+	public void setEntities(MessageEntity[] entities) {
+		this.entities = entities;
+	}
+
+	public Audio getAudio() {
+		return audio;
+	}
+
+	public void setAudio(Audio audio) {
+		this.audio = audio;
+	}
+
+	public Document getDocument() {
+		return document;
+	}
+
+	public void setDocument(Document document) {
+		this.document = document;
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	public PhotoSize[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(PhotoSize[] photo) {
+		this.photo = photo;
+	}
+
+	public Sticker getSticker() {
+		return sticker;
+	}
+
+	public void setSticker(Sticker sticker) {
+		this.sticker = sticker;
+	}
+
+	public Video getVideo() {
+		return video;
+	}
+
+	public void setVideo(Video video) {
+		this.video = video;
+	}
+
+	public Voice getVoice() {
+		return voice;
+	}
+
+	public void setVoice(Voice voice) {
+		this.voice = voice;
+	}
+
+	public String getCaption() {
+		return caption;
+	}
+
+	public void setCaption(String caption) {
+		this.caption = caption;
+	}
+
+	public Contact getContact() {
+		return contact;
+	}
+
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public Venue getVenue() {
+		return venue;
+	}
+
+	public void setVenue(Venue venue) {
+		this.venue = venue;
+	}
+
+	public User getNewChatMember() {
+		return newChatMember;
+	}
+
+	public void setNewChatMember(User newChatMember) {
+		this.newChatMember = newChatMember;
+	}
+
+	public User getLeftChatMember() {
+		return leftChatMember;
+	}
+
+	public void setLeftChatMember(User leftChatMember) {
+		this.leftChatMember = leftChatMember;
+	}
+
+	public String getNewChatTitle() {
+		return newChatTitle;
+	}
+
+	public void setNewChatTitle(String newChatTitle) {
+		this.newChatTitle = newChatTitle;
+	}
+
+	public PhotoSize[] getNewChatPhoto() {
+		return newChatPhoto;
+	}
+
+	public void setNewChatPhoto(PhotoSize[] newChatPhoto) {
+		this.newChatPhoto = newChatPhoto;
+	}
+
+	public Boolean getDeleteChatPhoto() {
+		return deleteChatPhoto;
+	}
+
+	public void setDeleteChatPhoto(Boolean deleteChatPhoto) {
+		this.deleteChatPhoto = deleteChatPhoto;
+	}
+
+	public Boolean getGroupChatCreated() {
+		return groupChatCreated;
+	}
+
+	public void setGroupChatCreated(Boolean groupChatCreated) {
+		this.groupChatCreated = groupChatCreated;
+	}
+
+	public Boolean getSupergroupChatCreated() {
+		return supergroupChatCreated;
+	}
+
+	public void setSupergroupChatCreated(Boolean supergroupChatCreated) {
+		this.supergroupChatCreated = supergroupChatCreated;
+	}
+
+	public Boolean getChannelChatCreated() {
+		return channelChatCreated;
+	}
+
+	public void setChannelChatCreated(Boolean channelChatCreated) {
+		this.channelChatCreated = channelChatCreated;
+	}
+
+	public String getMigrate_to_chat_id() {
+		return migrate_to_chat_id;
+	}
+
+	public void setMigrate_to_chat_id(String migrate_to_chat_id) {
+		this.migrate_to_chat_id = migrate_to_chat_id;
+	}
+
+	public String getMigrate_from_chat_id() {
+		return migrate_from_chat_id;
+	}
+
+	public void setMigrate_from_chat_id(String migrate_from_chat_id) {
+		this.migrate_from_chat_id = migrate_from_chat_id;
+	}
+
+	public Message getPinnedMessage() {
+		return pinnedMessage;
+	}
+
+	public void setPinnedMessage(Message pinnedMessage) {
+		this.pinnedMessage = pinnedMessage;
+	}
 }

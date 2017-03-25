@@ -15,6 +15,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * This object represents an incoming update.
  *
  * @since 0.0.1
+ * @see <a href="https://core.telegram.org/bots/api#update">http://google.com</a>
  */
 public class Update {
 	/**
@@ -25,19 +26,39 @@ public class Update {
 	 * order.
 	 */
 	@JsonProperty("update_id")
-	private Long updateId;
+	private Integer updateId;
+
 	/**
 	 * Optional. New incoming message of any kind ????????? text, photo, sticker, etc.
 	 */
+
 	@JsonProperty("message")
 	private Message message;
+
+	@JsonProperty("edited_message")
+	private Message editedMessage;
+
+	@JsonProperty("channel_post")
+	private Message channelPost;
+
+	@JsonProperty("edited_channel_post")
+	private Message editedChannelPost;
+
+	@JsonProperty("inline_query")
+	private InlineQuery inlineQuery;
+
+	@JsonProperty("chosen_inline_result")
+	private ChosenInlineResult chosenInlineResult;
+
+	@JsonProperty("callback_query")
+	private CallbackQuery callbackQuery;
 
 	/**
 	 * <p>Getter for the field <code>updateId</code>.</p>
 	 *
 	 * @return a {@link java.lang.Long} object.
 	 */
-	public Long getUpdateId() {
+	public Integer getUpdateId() {
 		return updateId;
 	}
 
@@ -46,7 +67,7 @@ public class Update {
 	 *
 	 * @param updateId a {@link java.lang.Long} object.
 	 */
-	public void setUpdateId(final Long updateId) {
+	public void setUpdateId(final Integer updateId) {
 		this.updateId = updateId;
 	}
 
@@ -102,10 +123,69 @@ public class Update {
 		return true;
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		return "Update [updateId=" + updateId + ", message=" + message + "]";
+		return "\nUpdate{" +
+				"updateId=" + updateId +
+				", message=" + message +
+				", editedMessage=" + editedMessage +
+				", channelPost=" + channelPost +
+				", editedChannelPost=" + editedChannelPost +
+				", inlineQuery=" + inlineQuery +
+				", chosenInlineResult=" + chosenInlineResult +
+				", callbackQuery=" + callbackQuery +
+				'}';
 	}
 
+	/**
+	 * Getter and setter NEW
+	 */
+
+	public Message getEditedMessage() {
+		return editedMessage;
+	}
+
+	public void setEditedMessage(Message editedMessage) {
+		this.editedMessage = editedMessage;
+	}
+
+	public Message getChannelPost() {
+		return channelPost;
+	}
+
+	public void setChannelPost(Message channelPost) {
+		this.channelPost = channelPost;
+	}
+
+	public Message getEditedChannelPost() {
+		return editedChannelPost;
+	}
+
+	public void setEditedChannelPost(Message editedChannelPost) {
+		this.editedChannelPost = editedChannelPost;
+	}
+
+	public InlineQuery getInlineQuery() {
+		return inlineQuery;
+	}
+
+	public void setInlineQuery(InlineQuery inlineQuery) {
+		this.inlineQuery = inlineQuery;
+	}
+
+	public ChosenInlineResult getChosenInlineResult() {
+		return chosenInlineResult;
+	}
+
+	public void setChosenInlineResult(ChosenInlineResult chosenInlineResult) {
+		this.chosenInlineResult = chosenInlineResult;
+	}
+
+	public CallbackQuery getCallbackQuery() {
+		return callbackQuery;
+	}
+
+	public void setCallbackQuery(CallbackQuery callbackQuery) {
+		this.callbackQuery = callbackQuery;
+	}
 }

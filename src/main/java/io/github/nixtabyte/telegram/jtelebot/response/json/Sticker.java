@@ -15,6 +15,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * 	This object represents a sticker.
  *
  * @since 0.0.1
+ * @see <a href="https://core.telegram.org/bots/api#sticker">http://google.com</a>
  */
 public class Sticker{
 	/**
@@ -32,11 +33,20 @@ public class Sticker{
 	 */
 	@JsonProperty("height")
 	private Integer height;
+
+	/**
+	 * Optional.
+	 */
+
 	/**
 	 * Sticker thumbnail in .webp or .jpg format
 	 */
 	@JsonProperty("thumb")
 	private PhotoSize thumb;
+
+	@JsonProperty("emoji")
+	private String emoji;
+
 	/**
 	 * Optional. File size
 	 */
@@ -175,11 +185,28 @@ public class Sticker{
 			return false;
 		return true;
 	}
-	/** {@inheritDoc} */
+
 	@Override
 	public String toString() {
-		return "Sticker [fileId=" + fileId + ", width=" + width + ", height="
-				+ height + ", thumb=" + thumb + ", fileSize=" + fileSize + "]";
+		return "\nSticker{" +
+				"fileId='" + fileId + '\'' +
+				", width=" + width +
+				", height=" + height +
+				", thumb=" + thumb +
+				", emoji='" + emoji + '\'' +
+				", fileSize=" + fileSize +
+				'}';
 	}
 
+	/**
+	 * Getter and setter
+	 */
+
+	public String getEmoji() {
+		return emoji;
+	}
+
+	public void setEmoji(String emoji) {
+		this.emoji = emoji;
+	}
 }

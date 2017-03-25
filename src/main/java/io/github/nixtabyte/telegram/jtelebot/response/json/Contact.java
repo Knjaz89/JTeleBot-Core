@@ -14,6 +14,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 * Contact class
 *
 * @since 0.0.1
+ * @see <a href="https://core.telegram.org/bots/api#contact">http://google.com</a>
 */
 public class Contact {
 
@@ -39,7 +40,7 @@ public class Contact {
 	 * Optional. Contact's user identifier in Telegram
 	 * */
 	@JsonProperty("user_id")
-	private String userId;
+	private Integer userId;
 
 	public String getPhoneNumber() {
 		return phoneNumber;
@@ -95,7 +96,7 @@ public class Contact {
 	 *
 	 * @param lastName a {@link java.lang.String} object.
 	 */
-	public String getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
@@ -104,7 +105,7 @@ public class Contact {
 	 *
 	 * @return a {@link java.lang.String} object.
 	 */
-	public void setUserId(final String userId) {
+	public void setUserId(final Integer userId) {
 		this.userId = userId;
 	}
 
@@ -165,9 +166,12 @@ public class Contact {
 
 	@Override
 	public String toString() {
-		return "Contact [phoneNumber=" + phoneNumber + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", userId=" + userId
-				/** {@inheritDoc} */
-				+ "]";
+		return "\nContact{" +
+				"phoneNumber='" + phoneNumber + '\'' +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", userId=" + userId +
+				'}';
 	}
+
 }

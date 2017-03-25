@@ -15,6 +15,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * This object represents a video file.
  *
  * @since 0.0.1
+ * @see <a href="https://core.telegram.org/bots/api#video">http://google.com</a>
  */
 public class Video {
 	/**
@@ -262,13 +263,17 @@ public class Video {
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		return "Video [fileId=" + fileId + ", width=" + width + ", height="
-				+ height + ", duration=" + duration + ", thumbnail="
-				+ thumb + ", mimeType=" + mimeType + ", fileSize="
-				+ fileSize + ", caption=" + caption + "]";
+		return "\nVideo{" +
+				"fileId='" + fileId + '\'' +
+				", width=" + width +
+				", height=" + height +
+				", duration=" + duration +
+				", thumb=" + thumb +
+				", mimeType='" + mimeType + '\'' +
+				", fileSize=" + fileSize +
+				", caption='" + caption + '\'' +
+				'}';
 	}
-	
-	
 }
 
 

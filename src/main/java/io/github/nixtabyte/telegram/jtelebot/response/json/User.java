@@ -15,12 +15,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * This object represents a Telegram user or bot.
  *
  * @since 0.0.1
+ * @see <a href="https://core.telegram.org/bots/api#user">http://google.com</a>
  */
- /** This is problem. DefaultCommandWatcher : JSON parsing failed
- * DefaultCommandWatcher : io.github.nixtabyte.telegram.jtelebot.exception.JsonParsingException: 
- * org.codehaus.jackson.map.JsonMappingException: Unrecognized field "type" */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class User extends Chat{
+public class User {
 
 	
 	/**
@@ -38,7 +35,27 @@ public class User extends Chat{
 	 */
 	@JsonProperty("username")
 	private String username;
-	
+
+	@JsonProperty("id")
+	private Integer id;
+
+	@Override
+	public String toString() {
+		return "\nUser{" +
+				"firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", username='" + username + '\'' +
+				", id=" + id +
+				'}';
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	/**
 	 * <p>Getter for the field <code>firstName</code>.</p>
@@ -131,15 +148,4 @@ public class User extends Chat{
 			return false;
 		return true;
 	}
-	/** {@inheritDoc} */
-	@Override
-	public String toString() {
-		return "User [id=" +this.getId()+ " firstName=" + firstName + ", lastName=" + lastName
-				+ ", username=" + username + "]";
-	}
-
-	
-	
-	
-	
 }

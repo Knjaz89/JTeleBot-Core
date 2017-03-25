@@ -105,8 +105,9 @@ public class Location{
 
 	@Override
 	public String toString() {
-		/** {@inheritDoc} */
-		return "Location [longitude=" + longitude + ", latitude=" + latitude
-				+ "]";
+		return "\nLocation{" +
+				"longitude=" + longitude +
+				", latitude=" + latitude +
+				'}';
 	}
 }

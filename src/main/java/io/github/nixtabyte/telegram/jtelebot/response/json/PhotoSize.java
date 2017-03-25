@@ -15,6 +15,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * 	This object represents one size of a photo or a file / sticker thumbnail.
  *
  * @since 0.0.1
+ * @see <a href="https://core.telegram.org/bots/api#photosize">http://google.com</a>
  */
 public class PhotoSize{
 	/**
@@ -161,11 +162,11 @@ public class PhotoSize{
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		return "PhotoSize [fileId=" + fileId + ", width=" + width + ", height="
-				+ height + ", file_size=" + fileSize + "]";
+		return "\nPhotoSize{" +
+				"fileId='" + fileId + '\'' +
+				", width=" + width +
+				", height=" + height +
+				", fileSize=" + fileSize +
+				'}';
 	}
-	
-	
-
-
 }

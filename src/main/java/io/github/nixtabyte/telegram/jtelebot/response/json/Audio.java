@@ -15,6 +15,8 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * 	This object represents an audio file (voice note).
  *
  * @since 0.0.1
+ *
+ * @see <a href="https://core.telegram.org/bots/api#audio">http://google.com</a>
  */
 public class Audio{
 	/**
@@ -27,6 +29,21 @@ public class Audio{
 	 */
 	@JsonProperty("duration")
 	private Integer duration;
+
+	/**
+	 *  Optional
+	 */
+
+	/**
+	 *  Performer of the audio as defined by sender or by audio tags
+	 */
+	@JsonProperty("performer")
+	private String performer;
+	/**
+	 *  Title of the audio as defined by sender or by audio tags
+	 */
+	@JsonProperty("title")
+	private String title;
 	/**
 	 *  Optional. MIME type of the file as defined by sender
 	 */
@@ -37,6 +54,39 @@ public class Audio{
 	 */
 	@JsonProperty("file_size")
 	private Integer fileSize;
+
+	@Override
+	public String toString() {
+		return "\nAudio{" +
+				"fileId='" + fileId + '\'' +
+				", duration=" + duration +
+				", performer='" + performer + '\'' +
+				", title='" + title + '\'' +
+				", mimeType='" + mimeType + '\'' +
+				", fileSize=" + fileSize +
+				'}';
+	}
+
+	/**
+	 * Getter and setter
+	 */
+
+	public String getPerformer() {
+		return performer;
+	}
+
+	public void setPerformer(String performer) {
+		this.performer = performer;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	/**
 	 * <p>Getter for the field <code>fileId</code>.</p>
 	 *
@@ -149,12 +199,4 @@ public class Audio{
 			return false;
 		return true;
 	}
-	/** {@inheritDoc} */
-	@Override
-	public String toString() {
-		return "Audio [fileId=" + fileId + ", duration=" + duration
-				+ ", mimeType=" + mimeType + ", fileSize=" + fileSize + "]";
-	}
-
-		
 }

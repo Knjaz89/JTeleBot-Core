@@ -66,7 +66,7 @@ public final class TelegramRequestFactory {
 	 * @throws java.io.IOException if any.
 	 * @throws JsonParsingException 
 	 */
-	public static TelegramRequest createSendMessageRequest(final long chatId,final String text, final boolean disableWebPagePreview, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonParsingException{
+	public static TelegramRequest createSendMessageRequest(final Long chatId,final String text, final boolean disableWebPagePreview, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonParsingException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("text",text));
@@ -224,7 +224,7 @@ public final class TelegramRequestFactory {
 	 * @throws java.io.IOException if any.
 	 * @throws JsonParsingException 
 	 */
-	public static TelegramRequest createSendDocumentRequest(final long chatId,final String documentId, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws   JsonParsingException{
+	public static TelegramRequest createSendDocumentRequest(final Long chatId,final String documentId, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws   JsonParsingException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("document",documentId));
@@ -247,7 +247,7 @@ public final class TelegramRequestFactory {
 	 * @throws java.io.IOException if any.
 	 * @throws JsonParsingException 
 	 */
-	public static TelegramRequest createSendStickerRequest(final long chatId,final File inputFile, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws   JsonParsingException{
+	public static TelegramRequest createSendStickerRequest(final Long chatId, final File inputFile, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws   JsonParsingException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
@@ -269,7 +269,7 @@ public final class TelegramRequestFactory {
 	 * @throws org.codehaus.jackson.map.JsonMappingException if any.
 	 * @throws java.io.IOException if any.
 	 */
-	public static TelegramRequest createSendStickerRequest(final long chatId,final String stickerId, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonParsingException{
+	public static TelegramRequest createSendStickerRequest(final Long chatId,final String stickerId, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonParsingException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("sticker",stickerId));
@@ -292,7 +292,7 @@ public final class TelegramRequestFactory {
 	 * @throws java.io.IOException if any.
 	 * @throws JsonParsingException 
 	 */
-	public static TelegramRequest createSendVideoRequest(final long chatId,final File inputFile, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws   JsonParsingException{
+	public static TelegramRequest createSendVideoRequest(final long chatId,final File inputFile, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws   JsonParsingException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
