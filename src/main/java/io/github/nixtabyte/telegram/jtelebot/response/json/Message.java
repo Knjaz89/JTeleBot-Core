@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
  *
  * This material is provided "as is", with absolutely no warranty expressed
@@ -28,6 +28,9 @@ public class Message {
 	 */
 	@JsonProperty("message_id")
 	private Integer messageId;
+
+	@JsonProperty("id")
+	private Integer id;
 	/**
 	 * Date the message was sent in Unix time
 	 */
@@ -202,10 +205,24 @@ public class Message {
 	@JsonProperty("pinned_message")
 	private Message pinnedMessage;
 
+	@JsonProperty("new_chat_participant")
+	private Message new_chat_participant;
+
+	@JsonProperty("first_name")
+	private String firstName;
+
+	@JsonProperty("last_name")
+	private String lastName;
+
+	@JsonProperty("new_chat_members")
+	private User[] newChatMembers;
+
+
 	@Override
 	public String toString() {
-		return "\nMessage{" +
+		return "Message{" +
 				"messageId=" + messageId +
+				", id=" + id +
 				", date=" + date +
 				", chat=" + chat +
 				", from=" + from +
@@ -239,13 +256,17 @@ public class Message {
 				", migrate_to_chat_id='" + migrate_to_chat_id + '\'' +
 				", migrate_from_chat_id='" + migrate_from_chat_id + '\'' +
 				", pinnedMessage=" + pinnedMessage +
+				", new_chat_participant=" + new_chat_participant +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", newChatMembers=" + Arrays.toString(newChatMembers) +
 				'}';
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-	
+
 		int result = 1;
 		result = prime * result + ((audio == null) ? 0 : audio.hashCode());
 		result = prime * result + ((chat == null) ? 0 : chat.hashCode());
@@ -268,13 +289,13 @@ public class Message {
 		result = prime
 				* result
 				+ ((leftChatMember == null) ? 0
-						: leftChatMember.hashCode());
+				: leftChatMember.hashCode());
 		result = prime * result
 				+ ((location == null) ? 0 : location.hashCode());
 		result = prime
 				* result
 				+ ((newChatMember == null) ? 0
-						: newChatMember.hashCode());
+				: newChatMember.hashCode());
 		result = prime * result + Arrays.hashCode(newChatPhoto);
 		result = prime * result
 				+ ((newChatTitle == null) ? 0 : newChatTitle.hashCode());
@@ -296,7 +317,7 @@ public class Message {
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
-			/** {@inheritDoc} */
+		/** {@inheritDoc} */
 			return false;
 		Message other = (Message) obj;
 		if (audio == null) {
@@ -408,6 +429,14 @@ public class Message {
 
 	public void setMessageId(Integer messageId) {
 		this.messageId = messageId;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getDate() {
@@ -672,5 +701,37 @@ public class Message {
 
 	public void setPinnedMessage(Message pinnedMessage) {
 		this.pinnedMessage = pinnedMessage;
+	}
+
+	public Message getNew_chat_participant() {
+		return new_chat_participant;
+	}
+
+	public void setNew_chat_participant(Message new_chat_participant) {
+		this.new_chat_participant = new_chat_participant;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public User[] getNewChatMembers() {
+		return newChatMembers;
+	}
+
+	public void setNewChatMembers(User[] newChatMembers) {
+		this.newChatMembers = newChatMembers;
 	}
 }
