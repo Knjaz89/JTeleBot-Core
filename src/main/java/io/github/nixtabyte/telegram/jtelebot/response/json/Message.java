@@ -28,7 +28,6 @@ public class Message {
 	 */
 	@JsonProperty("message_id")
 	private Integer messageId;
-
 	@JsonProperty("id")
 	private Integer id;
 	/**
@@ -214,13 +213,16 @@ public class Message {
 	@JsonProperty("last_name")
 	private String lastName;
 
+	@JsonProperty("left_chat_participant")
+	private Message left_chat_participant;
+
 	@JsonProperty("new_chat_members")
 	private User[] newChatMembers;
 
 
 	@Override
 	public String toString() {
-		return "Message{" +
+		return "\nMessage{" +
 				"messageId=" + messageId +
 				", id=" + id +
 				", date=" + date +
@@ -259,6 +261,7 @@ public class Message {
 				", new_chat_participant=" + new_chat_participant +
 				", firstName='" + firstName + '\'' +
 				", lastName='" + lastName + '\'' +
+				", left_chat_participant=" + left_chat_participant +
 				", newChatMembers=" + Arrays.toString(newChatMembers) +
 				'}';
 	}
@@ -733,5 +736,13 @@ public class Message {
 
 	public void setNewChatMembers(User[] newChatMembers) {
 		this.newChatMembers = newChatMembers;
+	}
+
+	public Message getLeft_chat_participant() {
+		return left_chat_participant;
+	}
+
+	public void setLeft_chat_participant(Message left_chat_participant) {
+		this.left_chat_participant = left_chat_participant;
 	}
 }
