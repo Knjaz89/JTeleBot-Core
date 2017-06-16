@@ -8,11 +8,8 @@
  */
 package io.github.nixtabyte.telegram.jtelebot.response.json;
 
-import io.github.nixtabyte.telegram.jtelebot.mapper.json.MapperHandler;
-
 import java.util.Arrays;
 
-import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
@@ -219,6 +216,9 @@ public class Message {
 	@JsonProperty("new_chat_members")
 	private User[] newChatMembers;
 
+	@JsonProperty("video_note")
+	private VideoNote video_note;
+
 
 	@Override
 	public String toString() {
@@ -263,6 +263,7 @@ public class Message {
 				", lastName='" + lastName + '\'' +
 				", left_chat_participant=" + left_chat_participant +
 				", newChatMembers=" + Arrays.toString(newChatMembers) +
+				", video_note=" + video_note +
 				'}';
 	}
 
@@ -744,5 +745,13 @@ public class Message {
 
 	public void setLeft_chat_participant(Message left_chat_participant) {
 		this.left_chat_participant = left_chat_participant;
+	}
+
+	public VideoNote getVideo_note() {
+		return video_note;
+	}
+
+	public void setVideo_note(VideoNote video_note) {
+		this.video_note = video_note;
 	}
 }
