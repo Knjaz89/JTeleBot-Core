@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
  *
  * This material is provided "as is", with absolutely no warranty expressed
@@ -19,7 +19,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  */
 public class User {
 
-	
+
 	/**
 	 * String	Users or bots first name
 	 */
@@ -29,12 +29,15 @@ public class User {
 	 * String	Optional. Users or bots last name
 	 */
 	@JsonProperty("last_name")
-	private String lastName;	
+	private String lastName;
 	/**
 	 * Optional. Users or bots username
 	 */
 	@JsonProperty("username")
 	private String username;
+
+	@JsonProperty("language_code")
+	private String language_code;
 
 	@JsonProperty("id")
 	private Integer id;
@@ -45,6 +48,7 @@ public class User {
 				"firstName='" + firstName + '\'' +
 				", lastName='" + lastName + '\'' +
 				", username='" + username + '\'' +
+				", language_code='" + language_code + '\'' +
 				", id=" + id +
 				'}';
 	}
@@ -105,9 +109,15 @@ public class User {
 	public void setUsername(final String username) {
 		this.username = username;
 	}
-	
-	
-	
+
+	public String getLanguage_code() {
+		return language_code;
+	}
+
+	public void setLanguage_code(String language_code) {
+		this.language_code = language_code;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
