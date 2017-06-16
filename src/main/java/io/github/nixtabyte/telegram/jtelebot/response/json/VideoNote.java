@@ -15,15 +15,15 @@ public class VideoNote {
     @JsonProperty("length")
     private Integer length;
 
-    @JsonProperty("thumb")
-    private PhotoSize thumb;
+    @JsonProperty("duration")
+    private Integer duration;
 
     /**
      * Optional
      */
 
-    @JsonProperty("mime_type")
-    private String mimeType;
+    @JsonProperty("thumb")
+    private PhotoSize thumb;
 
     @JsonProperty("file_size")
     private Integer fileSize;
@@ -33,8 +33,8 @@ public class VideoNote {
         return "\nVideoNote{" +
                 "fileId='" + fileId + '\'' +
                 ", length=" + length +
+                ", duration=" + duration +
                 ", thumb=" + thumb +
-                ", mimeType='" + mimeType + '\'' +
                 ", fileSize=" + fileSize +
                 '}';
     }
@@ -59,20 +59,20 @@ public class VideoNote {
         this.length = length;
     }
 
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
     public PhotoSize getThumb() {
         return thumb;
     }
 
     public void setThumb(PhotoSize thumb) {
         this.thumb = thumb;
-    }
-
-    public String getMimeType() {
-        return mimeType;
-    }
-
-    public void setMimeType(String mimeType) {
-        this.mimeType = mimeType;
     }
 
     public Integer getFileSize() {
